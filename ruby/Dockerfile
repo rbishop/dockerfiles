@@ -6,8 +6,6 @@ MAINTAINER Richard Bishop <richard@rubiquity.com>
 RUN apt-get update -y
 RUN apt-get install -y \
   build-essential \
-  git \
-  git-core \
   wget \
   curl \
   libyaml-dev \
@@ -15,27 +13,17 @@ RUN apt-get install -y \
   libxslt1-dev \
   zlib1g-dev \
   imagemagick \
-  graphicsmagick \
   libssl-dev \
   libreadline-dev \
   libgdbm-dev \
   libffi-dev \
-  nodejs \
   libncurses-dev \
-  libsqlite3-dev \
-  libmysqlclient-dev \
   libpq-dev \
+  nodejs \
   bison
 
-# Install ruby-install
-RUN cd /tmp &&\
-  wget -O ruby-install-0.5.0.tar.gz https://github.com/postmodern/ruby-install/archive/v0.5.0.tar.gz &&\
-  tar -xzvf ruby-install-0.5.0.tar.gz &&\
-  cd ruby-install-0.5.0/ &&\
-  sudo make install
-
 # Install Ruby 2.1.3 and ignore gem documentation
-RUN ruby-install ruby 2.1.3 -- --disable-install-rdoc
+RUN curl https://s3.amazonaws.com/pkgr-buildpack-ruby/current/ubuntu-14.04/ruby-2.1.3.tgz -o - | sudo tar xzf - -C /usr/local
 RUN echo "gem: --no-document" > ~/.gemrc
 
 # Add Ruby binaries to $PATH
