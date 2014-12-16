@@ -1,5 +1,4 @@
 FROM rbishop/ruby:base
-
 MAINTAINER Richard Bishop <richard@rubiquity.com>
 
 # Install Ruby 2.1.3 and ignore gem documentation
@@ -7,11 +6,17 @@ RUN curl https://s3.amazonaws.com/pkgr-buildpack-ruby/current/ubuntu-14.04/ruby-
 RUN echo "gem: --no-document" > ~/.gemrc
 
 # Add Ruby binaries to $PATH
-ENV PATH /opt/rubies/ruby-2.1.3/bin:$PATH
+# Setup Ruby related environment variables
+ENV GEM_HOME /usr/local/lib/ruby/gems/2.1.0
+ENV NOKOGIRI_USE_SYSTEM_LIBRARIES 1
+
+# Install bundler and set build options for common gems
+RUN gem install bundler
+RUN bundle config build.nokogiri --with-xml2-include=/usr/include/libxml2
+RUN bundle config build.pg --with-pg-config=/usr/bin/pg_config
+RUN bundle config build.pg --with-pg-lib=/usr/lib
+RUN bundle config build.pg --with-pg-include=/usr/include/postgresql
 
 # Install common and slow installing gems
-RUN gem install bundler
-RUN gem install nokogiri -- --use-system-libraries --with-xml2-include=/usr/include/libxml2
-
-# Rails expects Node to be accessible with `node` command
-RUN ln -s /usr/bin/nodejs /usr/bin/node
+RUN gem install nokogiri
+RUN gem install pg
