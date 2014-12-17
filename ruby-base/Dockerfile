@@ -8,6 +8,7 @@ RUN apt-get install -y \
   wget \
   curl \
   libyaml-dev \
+  libxml2 \
   libxml2-dev \
   libxslt-dev \
   zlib1g-dev \
