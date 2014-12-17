@@ -10,9 +10,10 @@ RUN apt-get install -y \
   libyaml-dev \
   libxml2 \
   libxml2-dev \
+  libxslt \
   libxslt-dev \
+  zlib \
   zlib1g-dev \
-  libiconv-hook-dev \
   imagemagick \
   libssl-dev \
   libreadline-dev \
