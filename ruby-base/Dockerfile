@@ -8,8 +8,6 @@ RUN apt-get install -y \
   wget \
   curl \
   libyaml-dev \
-  libxml2 \
-  libxml2-dev \
   libxslt1.1 \
   libxslt-dev \
   zlib1g \
@@ -24,6 +22,12 @@ RUN apt-get install -y \
   libpq5 \
   nodejs \
   bison
+
+RUN wget http://xmlsoft.org/sources/libxml2-2.7.8.tar.gz && \
+    tar zxf libxml2-2.7.8.tar.gz && \
+    cd libxml2-2.7.8 && \
+    ./configure --prefix=/usr && \
+    make && make install
 
 # Rails expects Node to be accessible with `node` command
 RUN ln -s /usr/bin/nodejs /usr/bin/node
