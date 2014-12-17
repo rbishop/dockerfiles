@@ -27,7 +27,10 @@ RUN wget http://xmlsoft.org/sources/libxml2-2.7.8.tar.gz && \
     tar zxf libxml2-2.7.8.tar.gz && \
     cd libxml2-2.7.8 && \
     ./configure --prefix=/usr && \
-    make && make install
+    make && \
+    make install && \
+    cd .. && \
+    rm -rf libxml2-2.7.8*
 
 # Rails expects Node to be accessible with `node` command
 RUN ln -s /usr/bin/nodejs /usr/bin/node
