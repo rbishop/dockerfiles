@@ -8,8 +8,6 @@ RUN apt-get install -y \
   wget \
   curl \
   libyaml-dev \
-  libxslt1.1 \
-  libxslt-dev \
   zlib1g \
   zlib1g-dev \
   imagemagick \
@@ -23,6 +21,7 @@ RUN apt-get install -y \
   nodejs \
   bison
 
+# Build libxml2 2.7.8 from source
 RUN wget http://xmlsoft.org/sources/libxml2-2.7.8.tar.gz && \
     tar zxf libxml2-2.7.8.tar.gz && \
     cd libxml2-2.7.8 && \
@@ -31,6 +30,16 @@ RUN wget http://xmlsoft.org/sources/libxml2-2.7.8.tar.gz && \
     make install && \
     cd .. && \
     rm -rf libxml2-2.7.8*
+
+# Build libxslt 1.1.26 from source
+RUN wget http://xmlsoft.org/sources/libxslt-1.1.26.tar.gz && \
+    tar zxf libxslt-1.1.26.tar.gz && \
+    cd libxslt-1.1.26 && \
+    ./configure --prefix=/usr && \
+    make && \
+    make install && \
+    cd .. && \
+    rm -rf libxslt-1.1.26.tar.gz*
 
 # Rails expects Node to be accessible with `node` command
 RUN ln -s /usr/bin/nodejs /usr/bin/node
