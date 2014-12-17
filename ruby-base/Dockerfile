@@ -10,9 +10,9 @@ RUN apt-get install -y \
   libyaml-dev \
   libxml2 \
   libxml2-dev \
-  libxslt \
+  libxslt1.1 \
   libxslt-dev \
-  zlib \
+  zlib1g \
   zlib1g-dev \
   imagemagick \
   libssl-dev \
