@@ -1,10 +1,11 @@
-FROM ubuntu:14.04
+FROM debian:wheezy
 MAINTAINER Richard Bishop <richard@rubiquity.com>
 
 # Update apt, system libraries and get ruby dependencies
 RUN apt-get update -y
 RUN apt-get install -y \
   build-essential \
+  git \
   wget \
   curl \
   libyaml-dev \
@@ -18,7 +19,7 @@ RUN apt-get install -y \
   libncurses-dev \
   libpq-dev \
   libpq5 \
-  nodejs \
+  node \
   bison
 
 # Build libxml2 2.7.8 from source
