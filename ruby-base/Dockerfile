@@ -1,11 +1,14 @@
 FROM debian:wheezy
 MAINTAINER Richard Bishop <richard@rubiquity.com>
 
-# Update apt, system libraries and get ruby dependencies
-RUN apt-get update -y
+# Git needs to be installed from wheezy backports
+RUN echo deb http://http.debian.net/debian wheezy-backports main >> /etc/apt/sources.list
+RUN apt-get update -y && apt-get upgrade -y
+RUN apt-get -t wheezy-backports install git-core -y
+
+# Upgrade system libraries and get ruby dependencies
 RUN apt-get install -y \
   build-essential \
-  git \
   wget \
   curl \
   libyaml-dev \
