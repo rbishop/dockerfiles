@@ -22,7 +22,7 @@ RUN apt-get install -y \
   libncurses-dev \
   libpq-dev \
   libpq5 \
-  node \
+  nodejs \
   bison
 
 # Build libxml2 2.7.8 from source
