@@ -12,7 +12,9 @@ RUN wget -O ruby-install-0.5.0.tar.gz https://github.com/postmodern/ruby-install
     ruby-install -j4 -i /usr/local/ruby-2.2.0 ruby 2.2.0 && \
     rm -rf ruby-install* && \
     rm -rf /usr/local/share/ruby-install && \
-    rm -rf /usr/local/src
+    rm -rf /usr/local/src && \
+    rm -rf /usr/local/ruby-2.2.0/share/ri && \
+    rm -rf /usr/local/ruby-2.2.0/share/doc
 
 # Configure PATH and Ruby specific settings
 ENV PATH /usr/local/ruby-2.2.0/bin:$PATH
